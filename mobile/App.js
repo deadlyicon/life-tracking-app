@@ -16,9 +16,12 @@ export default class App extends React.Component {
   }
 
   render () {
-    const buttons = ['Hello', 'World', 'Buttons']
     const { selectedIndex } = this.state
-
+    const component1 = () => <Button large backgroundColor="#00FF00" buttonStyle={ { width: '100%' } }/>
+    const component2 = () => <Text>World</Text>
+    const component3 = () => <Text>ButtonGroup</Text>
+    const buttons = [{ element: component1 }, { element: component2 }, { element: component3 }]
+  
     return (
       <View style={styles.container}>
         <Text>Life Tracking App</Text>
@@ -26,7 +29,7 @@ export default class App extends React.Component {
           onPress={this.updateIndex}
           selectedIndex={selectedIndex}
           buttons={buttons}
-          containerStyle={{height: 100}} />
+          containerStyle={{height: 40}} />
          <Image
            style={{width: 150, height: 150}}
            source={{uri: 'https://media.giphy.com/media/CO8wN7YrZ3X0Y/giphy.gif'}}
