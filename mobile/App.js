@@ -1,12 +1,16 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import React from 'react'
+import { StyleSheet, Text, View, Image } from 'react-native'
+import { Button } from 'react-native-elements'
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-
+        <Text>Life Tracking App</Text>
+        <Image
+          style={{width: 150, height: 150}}
+          source={{uri: 'https://media.giphy.com/media/CO8wN7YrZ3X0Y/giphy.gif'}}
+        />
         <Button
           raised
           icon={{name: 'home', size: 32}}
@@ -14,9 +18,6 @@ export default class App extends React.Component {
           textStyle={{textAlign: 'center'}}
           title={`Welcome to\nReact Native Elements`}
         />
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
       </View>
     );
   }
