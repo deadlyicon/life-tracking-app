@@ -1,8 +1,15 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {StyleSheet, Text, View, Image} from 'react-native'
 import {StackNavigator} from 'react-navigation'
-import ReactNativeSimpleAuthExample from './authentication'
+import {Profile, Login} from '../authentication'
+import secrets from '../secrets';
 
-export const LoginScreen = () => {
-  ReactNativeSimpleAuthExample.Login
+class LoginScreen extends Component {
+  render () {
+    return (
+      < Login title = {'Login'} secrets = {secrets} />
+    )
+  }
 }
+
+export default LoginScreen

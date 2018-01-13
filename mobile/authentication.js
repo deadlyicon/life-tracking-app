@@ -9,9 +9,8 @@ import {
   View
 } from 'react-native';
 import * as simpleAuthProviders from 'react-native-simple-auth';
-import secrets from './secrets';
 
-class Profile extends Component {
+export class Profile extends Component {
 
   constructor(props) {
     super(props);
@@ -73,7 +72,7 @@ class Profile extends Component {
 
 }
 
-class Login extends Component {
+export class Login extends Component {
 
   constructor(props) {
     super(props);
@@ -117,7 +116,6 @@ class Login extends Component {
       _this.setState({loading: false});
       _this
         .props
-        .navigator
         .push({title: provider, provider, info, index: 1});
     }).catch((error) => {
       _this.setState({loading: false});
@@ -127,25 +125,25 @@ class Login extends Component {
 
 }
 
-export default class ReactNativeSimpleAuthExample extends Component {
-  render() {
-    return (
-      // <Navigator
-      //   style={styles.container}
-      //   initialRoute={{
-      //   title: 'Simple Auth',
-      //   secrets,
-      //   index: 0
-      // }}
-        renderScene={(route, navigator) => {
-        return route.info
-          ? <Profile info={route.info} provider={route.provider}/>
-          : <Login title={route.title} secrets={route.secrets} navigator={navigator}/>
-        }}
-        // navigationBar={< Navigator.NavigationBar routeMapper = {{ LeftButton: (route, navigator, index, navState) => { if (index === 0) { return null; } else { return ( <TouchableHighlight onPress={() => navigator.pop()}> <Text style={{ padding: 15 }}>Back</Text> </TouchableHighlight> ); } }, RightButton: (route, navigator, index, navState) => { return null; }, Title: (route, navigator, index, navState) => { return <Text style={{ padding: 15 }}>ReactNativeSimpleAuthExample</Text>; }, }} style={{ backgroundColor: 'lightgray' }} />}/>
-    )
-  }
-}
+// export default class ReactNativeSimpleAuthExample extends Component {
+//   render() {
+//     return (
+//       <Navigator
+//         style={styles.container}
+//         initialRoute={{
+//         title: 'Simple Auth',
+//         secrets,
+//         index: 0
+//       }}
+//         renderScene={(route, navigator) => {
+//         return route.info
+//           ? <Profile info={route.info} provider={route.provider}/>
+//           : <Login title={route.title} secrets={route.secrets} navigator={navigator}/>
+//         }}
+//         navigationBar={< Navigator.NavigationBar routeMapper = {{ LeftButton: (route, navigator, index, navState) => { if (index === 0) { return null; } else { return ( <TouchableHighlight onPress={() => navigator.pop()}> <Text style={{ padding: 15 }}>Back</Text> </TouchableHighlight> ); } }, RightButton: (route, navigator, index, navState) => { return null; }, Title: (route, navigator, index, navState) => { return <Text style={{ padding: 15 }}>ReactNativeSimpleAuthExample</Text>; }, }} style={{ backgroundColor: 'lightgray' }} />}/>
+//     )
+//   }
+// }
 
 let styles = StyleSheet.create({
   text: {

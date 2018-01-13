@@ -1,15 +1,20 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {StyleSheet, Text, View, Image} from 'react-native'
 import {StackNavigator} from 'react-navigation'
 
-export const HomeScreen = () => (
-  <View
-    style={{
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }}>
-    <Text>Home Screen</Text>
-  </View>
-)
+class HomeScreen extends Component {
+  render() {
+    return (
+      <View
+        style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <Text>Home Screen</Text>
+      </View>
+    )
+  }
+}
 
+export default HomeScreen
