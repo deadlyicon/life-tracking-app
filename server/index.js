@@ -1,47 +1,25 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
-const { makeExecutableSchema } = require('graphql-tools');
+import express from 'express';
+import cors from 'cors';
+import {
+  graphqlExpress,
+  graphiqlExpress,
+} from 'graphql-server-express';
+import bodyParser from 'body-parser';
 
-// Some fake data
-const books = [
-  {
-    title: "Harry Potter and the Sorcerer's stone",
-    author: 'J.K. Rowling',
-  },
-  {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
-  },
-];
+import { schema } from './src/schema';
 
-// The GraphQL schema in string form
-const typeDefs = `
-  type Query { books: [Book] }
-  type Book { title: String, author: String }
-`;
+const PORT = 7700;
+const server = express();
+server.use('*', cors({ origin: 'http://localhost:8000' })); //Restrict the client-origin for security reasons.
 
-// The resolvers
-const resolvers = {
-  Query: { books: () => books },
-};
+server.use('/graphql', bodyParser.json(), graphqlExpress({
+  schema 
+}));
 
-// Put together a schema
-const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-});
+server.use('/graphiql', graphiqlExpress({
+  endpointURL: '/graphql'
+}));
 
-// Initialize the app
-const app = express();
-
-// The GraphQL endpoint
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
-
-// GraphiQL, a visual editor for queries
-app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
-
-// Start the server
-app.listen(3000, () => {
-  console.log('Go to http://localhost:3000/graphiql to run queries!');
-});
+server.listen(PORT, () =>
+  console.log(`GraphQL Server is now running on http://localhost:${PORT}`)
+);
