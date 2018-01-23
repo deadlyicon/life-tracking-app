@@ -1,28 +1,29 @@
 // app/src/resolvers.js
-const channels = [{
+const habits = [{
   id: 1,
-  name: 'soccer',
+  name: 'exercise',
 }, {
   id: 2,
-  name: 'baseball',
-}];
+  name: 'brush teeth'
+
+}]
 
 let nextId = 3;
 
 export const resolvers = {
   Query: {
-    channels: () => {
-      return channels;
+    habits: () => {
+      return habits;
     },
-    channel: (root, { id }) => {
-      return channels.find(channel => channel.id == id);
-    },
+    habit: (root, { id }) => {
+      return habits.find(habit => habit.id == id);
+    }
   },
   Mutation: {
-    addChannel: (root, args) => {
-      const newChannel = { id: nextId++, name: args.name };
-      channels.push(newChannel);
-      return newChannel;
+    addHabit: (root, args) => {
+      const newHabit = { id: nextId++, name: args.name };
+      habits.push(newHabit);
+      return newHabit;
     },
   },
 };
