@@ -1,6 +1,7 @@
 import { GraphQLScalarType } from 'graphql';
 import { Kind } from 'graphql/language';
 import moment from 'moment';
+import sortBy from 'lodash/sortBy'
 // app/src/resolvers.js
 const habits = [{
   id: 1,
@@ -21,6 +22,11 @@ const getHabit = (id) => {
 const DATE_FORMAT = 'YYYYMMDD'
 
 export const resolvers = {
+  Habit: {
+    records(obj, args, context) {
+      return sortBy(obj.records, (record => record.date))
+    }
+  },
   Date: new GraphQLScalarType({
     name: 'Date',
     description: 'Date custom scalar type',
