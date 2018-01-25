@@ -1,5 +1,6 @@
 import { GraphQLScalarType } from 'graphql';
 import { Kind } from 'graphql/language';
+import moment from 'moment';
 // app/src/resolvers.js
 const habits = [{
   id: 1,
@@ -17,21 +18,20 @@ const getHabit = (id) => {
   return habits.find(habit => habit.id == id)
 }
 
+const DATE_FORMAT = 'YYYYMMDD'
+
 export const resolvers = {
   Date: new GraphQLScalarType({
     name: 'Date',
     description: 'Date custom scalar type',
     parseValue(value) {
-      return new Date(value); // value from the client
+      return new moment(value, DATE_FORMAT)
     },
     serialize(value) {
       return value;
     },
     parseLiteral(ast) {
-      if (ast.kind === Kind.INT) {
-        return parseInt(ast.value, 10); // ast value is always in string format
-      }
-      return null;
+      return new moment(ast.value, DATE_FORMAT).format(DATE_FORMAT); //This should protect against bad data
     },
   }),
   Query: {
