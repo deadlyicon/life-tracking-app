@@ -4,10 +4,17 @@ import {  makeExecutableSchema } from 'graphql-tools';
 import { resolvers } from './resolvers'; // Will be implemented at a later stage.
 
 const typeDefs = `
+    scalar Date
+
     type Habit {
       id: ID!
       name: String
+      records: [Record]
+    }
 
+    type Record {
+      date: Date
+      didAction: Boolean 
     }
 
 
@@ -21,6 +28,13 @@ const typeDefs = `
     type Mutation {
       # A mutation to add a new habit to the list of habits
       addHabit(name: String!): Habit
+      recordAction(input: RecordActionInput!): Habit
+    }
+
+    input RecordActionInput {
+      habitId: ID!
+      date: Date!
+      didAction: Boolean!
     }
     `;
 
