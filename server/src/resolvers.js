@@ -59,5 +59,12 @@ export const resolvers = {
       }
       return habit
     },
+
+    deleteAction: (root, { input }) => {
+      const { habitId, date } = input
+      const habit = getHabit(habitId)
+      habit.records = habit.records.filter(record => record.date != date)
+      return habit
+    }
   },
 };

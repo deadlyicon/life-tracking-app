@@ -29,12 +29,18 @@ const typeDefs = `
       # A mutation to add a new habit to the list of habits
       addHabit(name: String!): Habit
       recordAction(input: RecordActionInput!): Habit
+      deleteAction(input: DeleteActionInput!): Habit
     }
 
     input RecordActionInput {
       habitId: ID!
       date: Date!
       didAction: Boolean!
+    }
+
+    input DeleteActionInput {
+      habitId: ID!
+      date: Date!
     }
     `;
 
