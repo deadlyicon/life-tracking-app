@@ -9,7 +9,10 @@
     "start": "nodemon index.js --exec babel-node --presets es2015 stage-2",
     "lint": "./node_modules/.bin/eslint **/*.js"
   },
-  "repository": "git+https://github.com/deadlyicon/life-tracking-app.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deadlyicon/life-tracking-app.git"
+  },
   "author": "",
   "license": "MIT",
   "bugs": {
