@@ -1,7 +1,7 @@
 // app/src/schema.js
-import {  makeExecutableSchema } from 'graphql-tools';
+import {  makeExecutableSchema } from 'graphql-tools'
 
-import { resolvers } from './resolvers'; // Will be implemented at a later stage.
+import { resolvers } from './resolvers' // Will be implemented at a later stage.
 
 const typeDefs = `
     scalar Date
@@ -42,7 +42,7 @@ const typeDefs = `
       habitId: ID!
       date: Date!
     }
-    `;
+    `
 
-const schema = makeExecutableSchema({ typeDefs, resolvers });
-export { schema };
+const schema = makeExecutableSchema({ typeDefs, resolvers })
+export { schema }

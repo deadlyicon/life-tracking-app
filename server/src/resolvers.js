@@ -1,8 +1,7 @@
-import { GraphQLScalarType } from 'graphql';
-import { Kind } from 'graphql/language';
-import moment from 'moment';
+import { GraphQLScalarType } from 'graphql'
+import moment from 'moment'
 import sortBy from 'lodash/sortBy'
-// app/src/resolvers.js
+
 const habits = [{
   id: 1,
   name: 'exercise',
@@ -13,7 +12,7 @@ const habits = [{
   records: []
 }]
 
-let nextId = 3;
+let nextId = 3
 
 const getHabit = (id) => {
   return habits.find(habit => habit.id == id)
@@ -23,7 +22,7 @@ const DATE_FORMAT = 'YYYYMMDD'
 
 export const resolvers = {
   Habit: {
-    records(obj, args, context) {
+    records(obj) {
       return sortBy(obj.records, (record => record.date))
     }
   },
@@ -34,15 +33,15 @@ export const resolvers = {
       return new moment(value, DATE_FORMAT)
     },
     serialize(value) {
-      return value;
+      return value
     },
     parseLiteral(ast) {
-      return new moment(ast.value, DATE_FORMAT).format(DATE_FORMAT); //This should protect against bad data
+      return new moment(ast.value, DATE_FORMAT).format(DATE_FORMAT) //This should protect against bad data
     },
   }),
   Query: {
     habits: () => {
-      return habits;
+      return habits
     },
     habit: (root, { id }) => {
       getHabit(id)
@@ -50,9 +49,9 @@ export const resolvers = {
   },
   Mutation: {
     addHabit: (root, args) => {
-      const newHabit = { id: nextId++, name: args.name };
-      habits.push(newHabit);
-      return newHabit;
+      const newHabit = { id: nextId++, name: args.name }
+      habits.push(newHabit)
+      return newHabit
     },
     recordAction: (root, { input }) => {
       const { habitId, date, didAction } = input
@@ -73,4 +72,4 @@ export const resolvers = {
       return habit
     }
   },
-};
+}
