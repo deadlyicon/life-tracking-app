@@ -2,9 +2,10 @@ import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import Habit from './Habit'
 
 // The data prop, which is provided by the wrapper below contains,
-// a `loading` key while the query is in flight and posts when ready
+// a `loading` key while the query is in flight and habits when ready
 function Habits({ data: { loading, habits } }) {
   if (loading) {
     return <Text style={styles.outer}>Loading</Text>;
@@ -13,11 +14,7 @@ function Habits({ data: { loading, habits } }) {
       <View style={styles.container}>
         <Text>Habits: The Life Hacking App</Text>
         {habits.map(habit => (
-          <View key={habit.id} style={styles.wrapper}>
-            <View>
-              <Text style={styles.header}>{habit.name}</Text>
-            </View>
-         </View>
+          <Habit key={habit.id} {...habit}/>
         ))}
       </View>
     )
